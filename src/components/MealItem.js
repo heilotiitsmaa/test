@@ -1,6 +1,8 @@
 import React from 'react';
+import Button from './UI/Button';
+import '../index.css';
 const MealItem = (props) => {
-    
+
     const formattedPrice = new Intl.NumberFormat('de-DE', {
         style: 'currency',
         currency: 'EUR', // Asenda oma valuutaga (nt EUR, GBP)
@@ -15,8 +17,8 @@ const MealItem = (props) => {
                     <p className='meal-item-price'>{formattedPrice}</p>
                     <p className='meal-item-description'>{props.meal.description}</p>
                 </div>
-                <p>
-                    <button >Add to Cart</button>
+                <p className='meal-item-actions'>
+                    <Button >Add to Cart</Button>
                 </p>
             </article>
         </li>
@@ -24,4 +26,4 @@ const MealItem = (props) => {
     )
 }
 
-export default MealItem
+export default MealItem;
