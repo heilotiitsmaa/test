@@ -1,6 +1,8 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import MealItem from "./MealItem";
 
 const Meals = () => {
+    const [meals, setMeals] = useState([]); // State to hold meals data
     // useEffect to fetch data from backend
     useEffect(() => {
         const fetchMeals = async () => {
@@ -9,9 +11,9 @@ const Meals = () => {
                 if (!response.ok) {
                     throw new Error('Failed to fetch meals');
                 }
-                const data = await response.json();
-                console.log(data);
-                // setMeals(data); // Assuming you have a state to set the meals
+                const mealsData = await response.json();
+                console.log(mealsData);
+                setMeals(mealsData); // Assuming you have a state to set the meals
             } catch (error) {
                 console.error('Error fetching meals:', error);
             }
@@ -20,12 +22,13 @@ const Meals = () => {
     }, []); // Empty dependency array to run once on component mount
     return (
         <ul id="meals">
-            { 
-                // list of meals
-                <h2>CREATE LIST OF MEALS, USING FETCH DATA FROM BACKEND</h2>
-            }
+            {meals.map(meal => (
+                <MealItem key={meal.id} meal={meal} />
+            ))}
+
+            
         </ul>
     )
 }
 
-export default Meals
+export default Meals;
