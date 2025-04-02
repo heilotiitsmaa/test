@@ -17,7 +17,7 @@ app.use((req, res, next) => {
 });
 
 app.get("/meals", async (req, res) => {
-  const meals = "[]" // data should be read from file
+const meals = await fs.readFile(path.join(__dirname, "meals.json"), "utf-8");
   res.json(JSON.parse(meals));
 });
 
@@ -29,4 +29,7 @@ app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
 });
 
-app.listen(3001);
+app.listen(3001, () => {
+  console.log("Server is running on port 3001");
+}
+);
